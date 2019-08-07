@@ -1,0 +1,14 @@
+# Build directory
+dist
+
+# Test directories
+coverage
+
+# Logs
+logs
+
+# Minified files
+**/*{.,-}min.js
+
+# NPM files
+package.json
