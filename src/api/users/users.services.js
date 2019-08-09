@@ -1,24 +1,12 @@
 import logger from '../../utils/logger'
-import {
-  hashPassword,
-  comparePasswords,
-  signJWTAsync
-  // verifyJWTAsync,
-} from '../../utils/utils'
-import {
-  UserInfoInUse,
-  InvalidCredentials
-  // UserNotFound,
-  // UnauthorizedError,
-} from './users.errors'
+import { hashPassword, comparePasswords, signJWTAsync } from '../../utils/utils'
+import { UserInfoInUse, InvalidCredentials } from './users.errors'
 import {
   createUser,
   checkUserRegistration,
   checkUserLogin,
-  // getUser,
   updateUser,
   getAllUsers
-  // deleteUser,
 } from './users.controllers'
 
 /**
@@ -87,18 +75,6 @@ export const loginUserService = async (req, res) => {
     throw new InvalidCredentials()
   }
 
-  /* if (!registeredUser.isVerified) {
-    logger.warn(
-      `User [${
-        credentials.username
-      }] hasn't verified his email. Authentication failed.`
-    )
-
-    throw new UnauthorizedError(
-      "You haven't verified your email. Verify it and try your request again."
-    )
-  } */
-
   const correctPassword = await comparePasswords(
     credentials.password,
     registeredUser.password
@@ -155,28 +131,6 @@ export const changePasswordService = async (req, res) => {
 }
 
 /**
- * Service to update an User.
- *
- * @param {object} req
- * @param {object} res
- */
-/* export const updateUserService = async (req, res) => {
-  const userData = req.body
-
-  const updatedUser = await updateUser(req.params.id, userData)
-
-  const { password, updatedAt, createdAt, token, ...rest } = updatedUser
-
-  logger.info(`User ${updatedUser.username} completed an update`, rest)
-
-  res.status(200).json({
-    message: 'User updated sucessfully',
-    response: { ...rest, isVerified: Boolean(updatedUser.isVerified) },
-    statusCode: 200,
-  })
-} */
-
-/**
  * Service to list all the users.
  *
  * @param {object} req
@@ -196,72 +150,3 @@ export const getAllUsersService = async (req, res) => {
     statusCode: 200
   })
 }
-
-/**
- * Service to fetch a specific user.
- *
- * @param {object} req
- * @param {object} res
- */
-/* export const getUserService = async (req, res) => {
-  const { id } = req.params
-
-  const user = await getUser({ id })
-
-  if (!user) {
-    logger.warn(`The user with ID [${id}] was not found.`)
-
-    throw new UserNotFound(id)
-  }
-
-  logger.info('The following user was consulted', user)
-
-  const { password, updatedAt, createdAt, ...rest } = user
-
-  res.status(200).json({
-    message: 'User consulted sucessfully',
-    response: user,
-    statusCode: 200,
-  })
-} */
-
-/**
- * Service to perfom an email verification.
- *
- * @param {object} req
- * @param {object} res
- */
-/* export const verificationService = async (req, res) => {
-  const token = req.body
-
-  const userToken = await verifyJWTAsync(token.code)
-
-  const updatedUser = await updateUser(userToken.id, { isVerified: true })
-
-  const { password, updatedAt, createdAt, ...rest } = updatedUser
-
-  res.status(200).json({
-    message: 'Account verified sucessfully',
-    response: { ...rest, isVerified: Boolean(updatedUser.isVerified) },
-    statusCode: 200,
-  })
-} */
-
-/**
- * Service to perfom an email verification.
- *
- * @param {object} req
- * @param {object} res
- * @param {function} next
- */
-/* export const deleteUserService = async (req, res, next) => {
-  const { id } = req.params
-  const deletedUser = await deleteUser(id)
-
-  if (!deletedUser) {
-    logger.warn(`The user with ID [${id}] was not found.`)
-    throw new UserNotFound(id)
-  }
-
-  return next()
-} */
