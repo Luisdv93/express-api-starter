@@ -56,7 +56,7 @@
   "scripts": {
     "build": "rimraf dist && babel src -D --out-dir dist",
     "start": "cross-env NODE_ENV=dev nodemon --watch .env --watch src --exec babel-node src --source-maps",
-    "prod": "cross-env NODE_ENV=prod npm run build && npm run start",
+    "prod": "cross-env NODE_ENV=prod npm run build && node dist",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "test": "cross-env NODE_ENV=test && jest --forceExit --runInBand",
