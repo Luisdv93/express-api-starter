@@ -7,7 +7,7 @@
     "@babel/register": "^7.5.5",
     "@sendgrid/mail": "^6.4.0",
     "@sentry/node": "^5.5.0",
-    "bcrypt": "3.0.6",
+    "bcrypt": "5.0.0",
     "compression": "^1.7.4",
     "cors": "2.8.5",
     "dotenv": "8.0.0",
